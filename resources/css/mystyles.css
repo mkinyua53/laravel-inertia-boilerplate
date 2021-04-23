@@ -1,0 +1,60 @@
+.hidden {
+  display: none;
+}
+
+[role="button"] {
+  cursor: pointer;
+}
+
+input {
+  border: 1px solid;
+}
+
+@media screen and (max-width: 425px) {
+  .v-card__title {
+    font-size: 4vw !important;
+  }
+}
+
+.btn-block {
+  width: 100%;
+}
+
+.text-muted {
+  color: #77777794;
+  font-size: smaller;
+}
+.theme--light>.v-data-table__wrapper>table>tbody>tr:nth-of-type(odd) {
+  background-color:#f9f9f9;
+}
+.theme--dark>.v-data-table__wrapper>table>tbody>tr:nth-of-type(odd) {
+  background-color:#61615066;
+}
+.jsb {
+  justify-content: space-between;
+}
+.slide-fade-enter-active {
+  transition: all .3s ease;
+}
+.slide-fade-leave-active {
+  transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+}
+.slide-fade-enter, .slide-fade-leave-to {
+  transform: translateX(10px);
+  opacity: 0;
+}
+.p-bg {
+  background-color: #d189ea !important;
+}
+@media print {
+  header, nav, .noprint {
+    display: none !important;
+  }
+  main {
+    margin: 0px !important;
+    padding: 0px 0px 0px 0px !important;
+  }
+}
+a.v-btn:hover {
+  text-decoration: none !important;
+}
