@@ -17,6 +17,7 @@
         "guzzlehttp/guzzle": "^7.0.1",
         "inertiajs/inertia-laravel": "^0.2.4",
         "kreait/laravel-firebase": "^3.1",
+        "larapacks/authorization": "v2.3.1",
         "laravel-notification-channels/fcm": "~2.0",
         "laravel-notification-channels/webpush": "^5.1",
         "laravel/framework": "^8.12",

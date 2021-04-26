@@ -153,5 +153,10 @@ if ('serviceWorker' in navigator) {
 }
 ```
 
+## Authorization front-end
+```js
+<v-btn small v-if="can && can['dashboard.view]">View Dashboard</v-btn>
+```
+
 ## Credits
 1. [Sagar Maheshwary](https://medium.com/@sagarmaheshwary31/push-notifications-with-laravel-and-webpush-446884265aaa) for the WebPush code
