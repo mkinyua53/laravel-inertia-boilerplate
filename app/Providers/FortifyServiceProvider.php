@@ -48,6 +48,42 @@ class FortifyServiceProvider extends ServiceProvider
             }
         });
 
+        Fortify::loginView(function () {
+            return inertia('Auth/login', [
+                'page_type' => 'auth'
+            ]);
+        });
+
+        Fortify::registerView(function () {
+            return inertia('Auth/UserRegister', [
+                'page_type' => 'auth',
+            ]);
+        });
+
+        Fortify::requestPasswordResetLinkView(function () {
+            return inertia('Auth/forgotPassword', [
+                'page_type' => 'auth'
+            ]);
+        });
+
+        Fortify::resetPasswordView(function () {
+            return inertia('Auth/resetPassword', [
+                'page_type' => 'auth'
+            ]);
+        });
+
+        Fortify::verifyEmailView(function () {
+            return inertia('Auth/verifyEmail', [
+                'page_type' => 'auth'
+            ]);
+        });
+
+        Fortify::twoFactorChallengeView(function () {
+            return inertia('Auth/2fa', [
+                'page_type' => 'auth',
+            ]);
+        });
+
         Fortify::createUsersUsing(CreateNewUser::class);
         Fortify::updateUserProfileInformationUsing(UpdateUserProfileInformation::class);
         Fortify::updateUserPasswordsUsing(UpdateUserPassword::class);

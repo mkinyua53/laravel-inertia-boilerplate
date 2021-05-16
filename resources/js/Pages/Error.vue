@@ -6,10 +6,13 @@
 </template>
 
 <script>
+import layout from '@/Layouts/Guest'
+
 export default {
   props: {
     status: Number,
   },
+  layout,
   computed: {
     title() {
       return {

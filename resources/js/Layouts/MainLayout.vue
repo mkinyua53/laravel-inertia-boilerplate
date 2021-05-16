@@ -139,9 +139,11 @@
     },
     methods: {
       logout () {
-        axios.post(route('logout').url()).then(response => {
-          window.location = '/';
-        })
+        this.$cookie.set('loggedout')
+        this.$inertia.post('logout')
+        // axios.post(route('logout').url()).then(response => {
+        //   window.location = '/';
+        // })
       },
       getprofile () {
         this.$inertia.visit('/user/profile')

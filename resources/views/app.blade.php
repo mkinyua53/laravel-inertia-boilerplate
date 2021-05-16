@@ -35,18 +35,20 @@
         <!-- Styles -->
         <link rel="stylesheet" href="{{ mix('css/app.css') }}">
         <link rel="stylesheet" href="/css/bootstrap.min.css">
-
-        <!-- Scripts -->
+    </head>
+    <body class="font-sans antialiased">
+        @inertia
+    </body>
+    <!-- Scripts -->
         @routes
         {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.26.0/moment.min.js"></script> --}}
         <script src="{{ mix('js/manifest.js') }}"></script>
         <script src="{{ mix('js/vendor.js') }}" defer></script>
         <script src="{{ mix('js/app.js') }}" defer></script>
-    </head>
-    <body class="font-sans antialiased">
-        @inertia
-    </body>
-    @auth
-        <script defer async src="/js/push.js"></script>
-    @endauth
+        @auth
+            <script defer async src="{{ '/js/push.js?token=' . Str::substr(Hash::make(\Carbon\Carbon::now()), 10) }}""></script>
+        @endauth
+        @guest
+            <script defer async src="{{ '/js/guest.js?token=' . Str::substr(Hash::make(\Carbon\Carbon::now()), 10) }}"></script>
+        @endguest
 </html>

@@ -82,7 +82,7 @@
                 <v-list-item-subtitle>Change between dark mode and light mode</v-list-item-subtitle>
               </v-list-item-content>
             </v-list-item>
-            <v-list-item href="/login" @click.stop.prevent="goTo('/auth/login')">
+            <v-list-item href="/login" @click.stop.prevent="goTo('/login')">
               <v-list-item-icon>
                 <v-icon>mdi-login</v-icon>
               </v-list-item-icon>
@@ -90,7 +90,7 @@
                 <v-list-item-title>Login</v-list-item-title>
               </v-list-item-content>
             </v-list-item>
-            <v-list-item href="/register">
+            <v-list-item href="/register" @click.prevent.stop="goTo('/register')">
               <v-list-item-icon>
                 <v-icon>mdi-account-plus</v-icon>
               </v-list-item-icon>
@@ -127,9 +127,11 @@
     },
     methods: {
       logout () {
-        axios.post(route('logout').url()).then(response => {
-          window.location = '/';
-        })
+        this.$cookie.set('loggedout')
+        this.$inertia.post('logout')
+        // axios.post(route('logout').url()).then(response => {
+        //   window.location = '/';
+        // })
       },
       getprofile () {
         this.$inertia.visit('/user/profile')
@@ -147,6 +149,36 @@
       if (element) {
         element.remove()
       }
+      window.addEventListener('loginresponse', function (e) {
+        var url = e.detail.url
+        if (url) {
+          var path = '/two-factor-challenge'
+          var index = url.indexOf(path)
+          if (index > -1) {
+            swal({
+              title: '',
+              text: 'Please enter your authentication code to complete the login',
+              type: 'warning',
+              showCancelButton: true,
+              confirmButtonColor: 'lightblue',
+              confirmButtonText:'Enter Code',
+              cancelButtonText: 'Later',
+            },
+            function () {
+              this.goTo(path)
+            }.bind(this))
+          } else {
+            this.message = 'Attempting login ...'
+            this.snackbar = true
+            this.goTo(url)
+            // this.$inertia.reload({ preserveScroll: true, preserveState: false })
+          }
+        } else {
+          this.message = 'Attempting login ...'
+          this.snackbar = true
+          this.$inertia.reload({ preserveScroll: true, preserveState: false })
+        }
+      }.bind(this))
     },
     mounted () {
       this.$nextTick(() => {

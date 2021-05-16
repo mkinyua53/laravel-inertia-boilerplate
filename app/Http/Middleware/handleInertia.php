@@ -23,7 +23,9 @@ class handleInertia
 
         if (File::exists($mixManifestFile = public_path('mix-manifest.json'))) {
             Inertia::version(function () use ($mixManifestFile) {
-                return md5_file($mixManifestFile);
+                $hash = md5_file($mixManifestFile);
+                $user = auth()->id() ?: '-';
+                return $hash . '-' . $user;
             });
         }
 

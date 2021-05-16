@@ -20,7 +20,7 @@
             </v-card>
           </v-flex>
           <v-flex xs12 sm6 md6 order-md1 order-sm1 order-xs2 class="pa-5">
-            <v-card class="elevation-24" href="/auth/login" @click.stop.prevent="goTo('/auth/login')">
+            <v-card class="elevation-24" href="/login" @click.stop.prevent="goTo('/login')">
               <v-card-text class="text-center">
                 <span>Log-In</span>
               </v-card-text>
