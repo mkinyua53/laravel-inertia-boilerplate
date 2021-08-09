@@ -77,7 +77,7 @@ export default {
   },
   computed: {
     $title() {
-      return 'Primacy Health'
+      return this.$page.props.title
     },
     $breakpoint() {
       return this.$vuetify.breakpoint

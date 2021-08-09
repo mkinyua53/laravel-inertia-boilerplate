@@ -3,36 +3,34 @@
     <v-app-bar app clipped-left elevate-on-scroll color="black" dark scroll-target="#maincontent" :bottom="$breakpoint.smAndDown">
       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
       <v-toolbar-title role="button" href="/" @click.stop.prevent="goTo('/')">
-        <v-img src="/images/logo-alt.svg" width="100px"></v-img>
+        <v-img src="/images/logo.png" width="50px" height="50px" contain></v-img>
       </v-toolbar-title>
       <v-toolbar-items v-if="$breakpoint.smAndUp">
-        <v-btn small icon href="/" @click.stop.prevent="goTo('/')">
+        <v-btn small icon fab href="/" @click.stop.prevent="goTo('/')">
           <v-icon>home</v-icon>
         </v-btn>
       </v-toolbar-items>
       <v-toolbar-items v-if="can['dashboard.view']">
-        <v-btn :icon="$breakpoint.xsOnly" class="" href="/dashboard" text @click.stop.prevent="goTo('/dashboard')">
-          <span v-if="$breakpoint.xsOnly">
-            <v-icon>dashboard</v-icon>
-          </span>
-          <span v-else>Dashboard</span>
+        <v-btn :icon="$breakpoint.xsOnly" class="" href="/dashboard" :fab="$breakpoint.xsOnly" text @click.stop.prevent="goTo('/dashboard')">
+          <v-icon :left="!$breakpoint.xsOnly">dashboard</v-icon>
+          <span v-if="!$breakpoint.xsOnly">Dashboard</span>
         </v-btn>
       </v-toolbar-items>
       <v-spacer></v-spacer>
       <v-toolbar-items>
-        <v-btn @click="reloadCurrent()" text small icon title="Reload current page">
+        <v-btn @click="reloadCurrent()" text small fab icon title="Reload current page">
           <v-icon>mdi-refresh</v-icon>
         </v-btn>
       </v-toolbar-items>
       <v-toolbar-items v-if="$breakpoint.smAndUp">
-        <v-btn @click="_changeMode()" text small icon title="Toggle Dark Mode">
+        <v-btn @click="_changeMode()" text small icon fab title="Toggle Dark Mode">
           <v-icon>mdi-theme-light-dark</v-icon>
         </v-btn>
       </v-toolbar-items>
       <v-toolbar-items>
         <v-menu bottom left offset-y transition="fab-transition" :origin="$breakpoint.smAndDown ? 'bottom right' : 'top right'">
           <template v-slot:activator="{ on, attrs }">
-            <v-btn icon v-bind="attrs" v-on="on">
+            <v-btn icon v-bind="attrs" v-on="on" fab>
               <v-icon>mdi-dots-vertical</v-icon>
             </v-btn>
           </template>
@@ -184,7 +182,7 @@
     methods: {
       logout () {
         this.$cookie.set('loggedout')
-        this.$inertia.post('logout')
+        this.$inertia.post('/logout')
         // axios.post(route('logout').url()).then(response => {
         //   window.location = '/';
         // })

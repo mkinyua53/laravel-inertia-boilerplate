@@ -29,6 +29,12 @@ class handleInertia
             });
         }
 
+        Inertia::share([
+            'message' => session('message'),
+            'previous'  => url()->previous(),
+            'title' => config('app.name'),
+        ]);
+
         $user = $request->user();
 
         if (!$user) {
@@ -51,10 +57,7 @@ class handleInertia
                 ];
             },
             'notifications' => $user->notifications,
-            'previous'  => url()->previous(),
         ]);
-
-        Inertia::share(['message' => session('message')]);
 
         // return $response;
         return $next($request);

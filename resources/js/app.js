@@ -7,8 +7,8 @@ import VueCookie from 'vue-cookie'
 import swal from 'sweetalert'
 import VueGtag from "vue-gtag"
 
-import { InertiaApp } from '@inertiajs/inertia-vue';
-import { InertiaForm } from 'laravel-jetstream';
+import { createInertiaApp, Link } from '@inertiajs/inertia-vue';
+// import { InertiaForm } from 'laravel-jetstream';
 import PortalVue from 'portal-vue';
 import navigateForVuetify from './Mixins/navigateForVuetify'
 import vuetify from './Plugins/vuetify'
@@ -22,8 +22,8 @@ InertiaProgress.init()
 Vue.mixin(navigateForVuetify)
 
 Vue.mixin({ methods: { route } });
-Vue.use(InertiaApp);
-Vue.use(InertiaForm);
+// Vue.use(InertiaApp);
+// Vue.use(InertiaForm);
 Vue.use(PortalVue);
 Vue.prototype.moment = moment
 Vue.use(VueCookie)
@@ -133,20 +133,37 @@ Vue.component(
   'm-password-confirm',
   require('@/Components/components/ConfirmsPassword.vue').default
 )
+Vue.component(
+  'inertia-link',
+  Link
+)
 
-const doc = document.getElementById('app');
+// const doc = document.getElementById('app');
 
-const app = new Vue({
-    vuetify,
-    render: (h) =>
-        h(InertiaApp, {
-            props: {
-                initialPage: JSON.parse(doc.dataset.page),
-                resolveComponent: (name) => require(`./Pages/${name}`).default,
-            },
-        }),
-}).$mount(doc);
+// const app = new Vue({
+//     vuetify,
+//     render: (h) =>
+//         h(InertiaApp, {
+//             props: {
+//                 initialPage: JSON.parse(doc.dataset.page),
+//                 resolveComponent: (name) => require(`./Pages/${name}`).default,
+//             },
+//         }),
+// }).$mount(doc);
 
-if (process.env.NODE_ENV != 'production') {
-  window.app = app
-}
+// if (process.env.NODE_ENV != 'production') {
+//   window.app = app
+// }
+
+createInertiaApp({
+  resolve: name => require(`./Pages/${name}`),
+  setup({ el, app, props }) {
+    const dev = new Vue({
+      vuetify,
+      render: h => h(app, props),
+    }).$mount(el)
+    if (process.env.NODE_ENV != 'production') {
+      window.app = dev
+    }
+  },
+})

@@ -16,27 +16,12 @@
   export default {
     name: 'UserDashboardIndex',
     //layout,
-    props: [],
-    components: {},
     metaInfo () {
       return {
         title: 'User Dashboard',
         titleTemplate: '%s | ' + this.$title,
       }
     },
-    data () {
-      return {}
-    },
-    methods: {
-      somemethod () {},
-    },
-    created () {
-      this.somemethod()
-    },
-    computed: {},
-    watch: {
-      //
-    }
   }
 </script>
 

@@ -58,7 +58,7 @@
 					<permissions :role="role"></permissions>
 				</v-flex>
 			</v-layout>
-			<modal-dialog :open="edit" @close="edit = false">
+			<modal-dialog v-model="edit">
 				<template slot="title">Edit Role</template>
 				<v-card>
 					<v-card-text>

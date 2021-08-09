@@ -3,34 +3,27 @@
     <v-app-bar app clipped-left color="black" dark :bottom="$breakpoint.smAndDown" scroll-target="#maincontent">
       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
       <v-toolbar-title role="button" @click="goTo('/')">
-        <v-img src="/images/logo.png" height="50px" width="50px"></v-img>
+        <v-img src="/images/logo.png" height="50px" width="50px" contain></v-img>
       </v-toolbar-title>
       <v-toolbar-items v-if="$breakpoint.smAndUp">
-        <v-btn small icon @click="goTo('/')">
+        <v-btn small fab icon @click="goTo('/')">
           <v-icon>home</v-icon>
         </v-btn>
       </v-toolbar-items>
       <v-toolbar-items v-if="can['dashboard.view']">
-        <v-btn :icon="$vuetify.breakpoint.xsOnly" class="" text @click="goTo('/dashboard')">
-          <span v-if="$vuetify.breakpoint.xsOnly">
-            <v-icon>mdi-tablet-dashboard</v-icon>
-          </span>
-          <span v-else>Dashboard</span>
-        </v-btn>
-      </v-toolbar-items>
-      <v-toolbar-items>
-        <v-btn text icon class="hidden">
-          <v-icon>mdi-tablet-dashboard</v-icon>
+        <v-btn :icon="$vuetify.breakpoint.xsOnly" class="" :fab="$vuetify.breakpoint.xsOnly" text @click="goTo('/dashboard')">
+          <v-icon :left="!$vuetify.breakpoint.xsOnly">dashboard</v-icon>
+          <span v-if="!$vuetify.breakpoint.xsOnly">Dashboard</span>
         </v-btn>
       </v-toolbar-items>
       <v-spacer></v-spacer>
       <v-toolbar-items>
-        <v-btn @click="reloadCurrent()" text small icon title="Reload current page">
+        <v-btn @click="reloadCurrent()" text small icon fab title="Reload current page">
           <v-icon>mdi-refresh</v-icon>
         </v-btn>
       </v-toolbar-items>
       <v-toolbar-items v-if="$breakpoint.smAndUp">
-        <v-btn @click="_changeMode()" text small icon title="Toggle Dark Mode">
+        <v-btn @click="_changeMode()" text small icon fab title="Toggle Dark Mode">
           <v-icon>mdi-theme-light-dark</v-icon>
         </v-btn>
       </v-toolbar-items>
@@ -137,7 +130,8 @@
     name: 'main-layout',
     metaInfo () {
       return {
-        title: 'Dashboard'
+        title: 'Dashboard',
+        titleTemplate: '%s | ' + this.$title
       }
     },
     data () {
@@ -148,7 +142,7 @@
     methods: {
       logout () {
         this.$cookie.set('loggedout')
-        this.$inertia.post('logout')
+        this.$inertia.post('/logout')
         // axios.post(route('logout').url()).then(response => {
         //   window.location = '/';
         // })

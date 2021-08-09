@@ -49,6 +49,11 @@
             <script defer async src="{{ '/js/push.js?token=' . Str::substr(Hash::make(\Carbon\Carbon::now()), 10) }}""></script>
         @endauth
         @guest
-            <script defer async src="{{ '/js/guest.js?token=' . Str::substr(Hash::make(\Carbon\Carbon::now()), 10) }}"></script>
+            @php
+                $value = session('loggedout', false);
+                if (!$value) {
+                    echo '<script defer async src="/js/guest.js"></script>';
+                }
+            @endphp
         @endguest
 </html>

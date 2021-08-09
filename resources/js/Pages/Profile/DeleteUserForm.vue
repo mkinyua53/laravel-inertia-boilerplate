@@ -18,7 +18,7 @@
                             Delete Account
                         </v-btn>
 
-                        <modal-dialog :open="confirmingUserDeletion" @close="confirmingUserDeletion = false">
+                        <modal-dialog v-model="confirmingUserDeletion">
                             <template slot="title">Delete Account</template>
                             <v-card>
                                 <v-card-text class="pa-1">

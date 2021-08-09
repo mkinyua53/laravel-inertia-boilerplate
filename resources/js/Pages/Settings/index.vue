@@ -11,7 +11,7 @@
 </template>
 
 <script>
-  import Layout from '@/Layouts/MainLayout.vue'
+  import layout from '@/Layouts/MainLayout.vue'
 
   export default {
     name: 'Settings',
@@ -21,26 +21,7 @@
         titleTemplate: '%s | ' + this.$title,
       }
     },
-    layout: Layout,
-    data () {
-      return {
-        data: '',
-      }
-    },
-    methods: {
-      somemethod () {
-         //
-      }
-    },
-    created () {
-      //
-    },
-    computed: {
-      //
-    },
-    watch: {
-      //
-    }
+    layout,
   }
 </script>
 <style>

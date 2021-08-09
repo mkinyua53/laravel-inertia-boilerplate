@@ -33,8 +33,5 @@
         titleTemplate: '%s | ' + this.$title,
       }
     },
-    computed: {
-      //
-    },
   }
 </script>

@@ -4,7 +4,7 @@
             <slot />
         </span>
 
-        <modal-dialog :open="confirmingPassword" @close="confirmingPassword = false">
+        <modal-dialog v-model="confirmingPassword">
           <template slot="title">{{ title }}</template>
            <v-card class="ma-1">
              <v-card-text>

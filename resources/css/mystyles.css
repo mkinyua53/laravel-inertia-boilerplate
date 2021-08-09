@@ -15,7 +15,9 @@ input {
     font-size: 4vw !important;
   }
 }
-
+html {
+  overflow-y: auto !important;
+}
 .btn-block {
   width: 100%;
 }

@@ -49,7 +49,7 @@
 							</jet-action-message>
             </div>
 						<!-- Logout Other Devices Confirmation Modal -->
-						<modal-dialog :open="confirmingLogout" @close="confirmingLogout = false">
+						<modal-dialog v-model="confirmingLogout">
 							<template #title>Logout Other Browser Sessions</template>
 							<p v-html="'Please enter your password to confirm you would like to logout of your other browser sessions across all of your devices.'"></p>
 							<v-text-field type="password" placeholder="Password" prepend-inner-icon="mdi-account-key" ref="password" v-model="form.password" @keyup.enter.native="logoutOtherBrowserSessions()" :error-messages="_error('password', 'logoutOtherBrowserSessions')" required></v-text-field>

@@ -15,7 +15,7 @@
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
-        "inertiajs/inertia-laravel": "^0.2.4",
+        "inertiajs/inertia-laravel": "^0.4.3",
         "kreait/laravel-firebase": "^3.1",
         "larapacks/authorization": "v2.3.1",
         "laravel-notification-channels/fcm": "~2.0",
@@ -33,7 +33,6 @@
         "facade/ignition": "^2.5",
         "fakerphp/faker": "^1.9.1",
         "mockery/mockery": "^1.4.2",
-        "nascent-africa/jetstrap": "^1.4",
         "nunomaduro/collision": "^5.0",
         "phpunit/phpunit": "^9.3.3"
     },

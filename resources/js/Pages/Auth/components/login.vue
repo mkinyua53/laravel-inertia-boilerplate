@@ -10,10 +10,10 @@
             </v-card-title>
             <v-card-text>
               <form method="POST" action="/login" ref="login-form" @submit.prevent="login(user)">
-                <p class="red--text" v-if="errors.email">{{ errors.email }}</p>
+                <!-- <p class="red--text" v-if="errors.email">{{ errors.email }}</p> -->
                 <input type="hidden" name="_token" :value="_token" />
-                <v-text-field label="Username / Email" v-model="user.email" name="email" required="required"></v-text-field>
-                <v-text-field label="Password" v-model="user.password" name="password" :type="pt ? 'text' : 'password'" required="required">
+                <v-text-field label="Username / Email" v-model="user.email" name="email" required="required" :error-messages="errors.email"></v-text-field>
+                <v-text-field label="Password" v-model="user.password" name="password" :type="pt ? 'text' : 'password'" required="required" :error-messages="errors.password">
                   <v-icon slot="append" @click="pt = !pt">
                     {{ pt ? 'mdi-eye-off' : 'mdi-eye' }}
                   </v-icon>

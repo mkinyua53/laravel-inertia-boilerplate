@@ -7,10 +7,8 @@
       </v-toolbar-title>
       <v-toolbar-items v-if="can && can['dashboard.view']">
         <v-btn :icon="$vuetify.breakpoint.xsOnly" class="" text href="/dashboard" @click.stop.prevent="goTo('/dashboard')">
-          <span v-if="$vuetify.breakpoint.xsOnly">
-            <v-icon>dashboard</v-icon>
-          </span>
-          <span v-else>Dashboard</span>
+          <v-icon :left="!$vuetify.breakpoint.xsOnly">dashboard</v-icon>
+          <span v-if="!$vuetify.breakpoint.xsOnly">Dashboard</span>
         </v-btn>
       </v-toolbar-items>
       <v-toolbar-items>
@@ -18,14 +16,14 @@
       </v-toolbar-items>
       <v-spacer></v-spacer>
       <v-toolbar-items class="px-1" v-if="$breakpoint.smAndUp">
-        <v-btn @click="_changeMode()" text small icon title="Toggle Dark Mode">
+        <v-btn @click="_changeMode()" text small fab icon title="Toggle Dark Mode">
           <v-icon>mdi-theme-light-dark</v-icon>
         </v-btn>
       </v-toolbar-items>
       <v-toolbar-items v-if="$page.props.user">
         <v-menu bottom left offset-y :close-on-content-click="false" transition="fab-transition" :origin="$breakpoint.smAndDown ? 'bottom right' : 'top right'">
           <template v-slot:activator="{ on, attrs }">
-            <v-btn :icon="$breakpoint.xsOnly" v-bind="attrs" v-on="on" text id="mybutton">
+            <v-btn :icon="$breakpoint.xsOnly" v-bind="attrs" :fab="$vuetify.breakpoint.xsOnly" v-on="on" text id="mybutton">
               <v-icon :left="!$breakpoint.xsOnly">mdi-account</v-icon>
               <span v-if="!$breakpoint.xsOnly">{{ $page.props.user.name }}</span>
             </v-btn>
@@ -128,7 +126,7 @@
     methods: {
       logout () {
         this.$cookie.set('loggedout')
-        this.$inertia.post('logout')
+        this.$inertia.post('/logout')
         // axios.post(route('logout').url()).then(response => {
         //   window.location = '/';
         // })

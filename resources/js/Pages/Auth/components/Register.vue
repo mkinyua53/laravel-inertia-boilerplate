@@ -15,6 +15,11 @@
                 <v-text-field label="Username" name="username" v-model="user.username" :error-messages="_error('username', 'createNewUser')"></v-text-field>
                 <v-text-field label="Password" v-model="user.password" name="Password" :rules="[form_rules.required]" min-length="8" type="password" :error-messages="_error('password', 'createNewUser')"></v-text-field>
                 <v-text-field type="password" label="Confirm Password" v-model="user.password_confirmation" name="Password Confirmation" :rules="[form_rules.required]" min-length="8"></v-text-field>
+                <v-checkbox v-model="user.terms_accepted">
+                  <template #label>
+                    <p>I have read and understood the <a href="/privacy_policy" target="_blank" rel="noopener noreferrer">Privacy Policy</a> and the <a href="terms_of_use" target="_blank" rel="noopener noreferrer">Terms of Use</a>.</p>
+                  </template>
+                </v-checkbox>
                 <v-btn type="submit" small color="primary" class="pull-right">Register</v-btn>
               </form>
               <br>
@@ -49,6 +54,7 @@
           username: '',
           password: '',
           password_confirmation: '',
+          terms_accepted: false,
         }, {
           bag: 'createNewUser'
         })

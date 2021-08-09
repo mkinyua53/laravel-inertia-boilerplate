@@ -19,33 +19,12 @@
 	export default {
 		name: 'Dashboard',
 		layout,
-		props: [
-			//
-		],
-		components: {
-			//
-		},
 		metaInfo () {
 			return {
 				title: 'Dashboard',
 				titleTemplate: '%s | ' + this.$title,
 			}
 		},
-		data () {
-			return {
-				//
-			}
-		},
-		methods: {
-			somemethod () {},
-		},
-		created () {
-			this.somemethod()
-		},
-		computed: {},
-		watch: {
-			'$route': 'somemethod',
-		}
 	}
 </script>
 

@@ -1,16 +1,19 @@
 <template>
   <transition name="slide-fade">
-    <v-dialog v-model="open" :fullscreen="fullscreen" persistent>
+    <v-dialog :value="value" :fullscreen="fullscreen"  @click:outside="$emit('close')">
       <v-card>
-        <v-card-title class="primary white--text pb-1 pt-1 px-1">
+        <v-card-title class="primary white--text pa-1">
           <h4 class="text-center">
             <slot name="title"></slot>
           </h4>
           <v-spacer></v-spacer>
-          <v-btn @click="$vuetify.theme.dark = !$vuetify.theme.dark" text small icon title="Toggle Dark Mode">
+          <v-btn small icon fab title="Refresh page" @click="$inertia.reload()" v-show="reload">
+            <v-icon>mdi-refresh</v-icon>
+          </v-btn>
+          <v-btn @click="$vuetify.theme.dark = !$vuetify.theme.dark" fab text small icon title="Toggle Dark Mode" v-show="theme">
             <v-icon>fa-tint</v-icon>
           </v-btn>
-          <v-btn class="pa-0 mt-0" icon text @click="$emit('close')" title="Close">
+          <v-btn class="pa-0 mt-0" icon text @click="$emit('close')" fab title="Close" small>
             <v-icon>fa-close</v-icon>
           </v-btn>
         </v-card-title>
@@ -18,7 +21,7 @@
           <slot/>
         </v-card-text>
         <v-card-actions class="pb-0 pt-0">
-          <v-btn class="pa-0" text @click="$emit('close')" title="Close">Close</v-btn>
+          <v-btn class="" text @click="$emit('close')" title="Close">Close</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -27,15 +30,26 @@
 <script>
   export default {
     name: 'DialogComponent',
+    model: {
+      props: 'value',
+      event: 'close'
+    },
     props: {
       fullscreen: {
         type: Boolean,
         default: false
       },
-      open: {
+      value: {
         type: Boolean,
-        required: true,
         default: false
+      },
+      reload: {
+        type: Boolean,
+        default: true
+      },
+      theme: {
+        type: Boolean,
+        default: true
       }
     },
     data () {
@@ -52,6 +66,7 @@
     }
   }
 </script>
+
 <style scoped>
   .v-card__actions {
     border-top: 1px solid;

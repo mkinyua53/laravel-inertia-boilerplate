@@ -3,41 +3,39 @@
     <v-app-bar app clipped-left elevate-on-scroll dark color="black" scroll-target="#maincontent" :bottom="$breakpoint.smAndDown">
       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
       <v-toolbar-title role="button" @click="goTo('/')" class="pl-0">
-        <v-img src="/images/logo.png" height="50px" width="50px"></v-img>
+        <v-img src="/images/logo.png" height="50px" width="50px" contain></v-img>
       </v-toolbar-title>
       <v-toolbar-items v-if="!$breakpoint.smAndDown">
-        <v-btn small icon @click="goTo('/')">
+        <v-btn small fab icon @click="goTo('/')">
           <v-icon>home</v-icon>
         </v-btn>
       </v-toolbar-items>
       <v-toolbar-items v-if="can['dashboard.view']">
         <v-btn :icon="$vuetify.breakpoint.xs" class="" text @click="goTo('/dashboard')">
-          <span v-if="$vuetify.breakpoint.xs">
-            <v-icon>dashboard</v-icon>
-          </span>
-          <span v-else>Dashboard</span>
+          <v-icon :left="!$vuetify.breakpoint.xsOnly">dashboard</v-icon>
+          <span v-if="!$vuetify.breakpoint.xsOnly">Dashboard</span>
         </v-btn>
       </v-toolbar-items>
       <v-spacer></v-spacer>
       <v-toolbar-items>
-        <v-btn icon text small v-if="getPrevious" @click="goTo(getPrevious)">
+        <v-btn icon text fab small v-if="getPrevious" @click="goTo(getPrevious)">
           <v-icon>mdi-arrow-left</v-icon>
         </v-btn>
       </v-toolbar-items>
       <v-toolbar-items>
-        <v-btn @click.stop.prevent="reloadCurrent()" text small href="?reload=true" icon title="Reload current page">
+        <v-btn @click.stop.prevent="reloadCurrent()" text fab small href="?reload=true" icon title="Reload current page">
           <v-icon>mdi-refresh</v-icon>
         </v-btn>
       </v-toolbar-items>
       <v-toolbar-items v-if="$breakpoint.smAndUp">
-        <v-btn @click="_changeMode()" text small icon title="Toggle Dark Mode">
+        <v-btn @click="_changeMode()" text small fab icon title="Toggle Dark Mode">
           <v-icon>mdi-theme-light-dark</v-icon>
         </v-btn>
       </v-toolbar-items>
       <v-toolbar-items>
         <v-menu bottom left offset-y  transition="fab-transition" :origin="$breakpoint.smAndDown ? 'bottom right' : 'top right'">
           <template v-slot:activator="{ on, attrs }">
-            <v-btn icon v-bind="attrs" v-on="on" small>
+            <v-btn icon v-bind="attrs" v-on="on" small fab>
               <v-icon>mdi-dots-vertical</v-icon>
             </v-btn>
           </template>
@@ -140,7 +138,7 @@
     methods: {
       logout () {
         this.$cookie.set('loggedout')
-        this.$inertia.post('logout')
+        this.$inertia.post('/logout')
         // axios.post(route('logout').url()).then(response => {
         //   window.location = '/';
         // })

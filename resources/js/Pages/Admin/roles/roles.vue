@@ -16,17 +16,19 @@
 									<inertia-link :href="'/admin/roles/' + item.id">{{ item.name }}</inertia-link>
 								</template>
 								<template v-slot:[`item.trash`]="{ item }">
-									<v-btn small icon title="Delete role" @click="deleteRole(item)" v-if="!item.default">
-										<v-icon>mdi-delete</v-icon>
-									</v-btn>
-									<v-icon v-else>mdi-delete-off</v-icon>
+									<m-password-confirm @confirmed="deleteRole(item)" v-if="!item.default">
+										<v-btn small icon title="Delete role">
+											<v-icon>mdi-delete</v-icon>
+										</v-btn>
+									</m-password-confirm>
+									<v-icon v-else title="Can't be deleted">mdi-delete-off</v-icon>
 								</template>
 							</v-data-table>
 						</v-card-text>
 					</v-card>
 				</v-flex>
 			</v-layout>
-			<modal-dialog :open="addNew" @close="addNew = false">
+			<modal-dialog v-model="addNew">
 				<template slot="title">Add New Role</template>
 				<v-card>
 					<v-card-text>
@@ -63,7 +65,7 @@
 					{ text: 'Description', value: 'label' },
 					{ text: 'Permissions', value: 'permissions_count' },
 					{ text: 'Users', value: 'users_count' },
-					{ text: 'Delete', value: 'trash' }
+					{ text: 'Delete', value: 'trash', align: 'right' }
 				],
 				addNew: false,
 				newrole: this.$inertia.form({

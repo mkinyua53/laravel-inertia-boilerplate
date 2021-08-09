@@ -1,25 +1,45 @@
 <template>
-  <div>
-    <h1>{{ title }}</h1>
-    <div>{{ description }}</div>
-  </div>
+  <v-container fluid>
+    <v-layout wrap class="justify-center align-center" style="height: calc(100vh - 120px);">
+      <v-flex xs11 md6 sm8>
+        <v-card class="elevation-24">
+          <v-card-title style="border-bottom: 1px solid">
+            <span class="text-center" id="title">{{ title }}</span>
+            <v-spacer></v-spacer>
+            <v-icon>&#128678;</v-icon>
+          </v-card-title>
+          <v-card-text class="py-10">
+            <p class="text-center" id="message">{{ description }}</p>
+          </v-card-text>
+        </v-card>
+      </v-flex>
+    </v-layout>
+  </v-container>
 </template>
 
 <script>
 import layout from '@/Layouts/Guest'
 
 export default {
+  name: 'Error-Page',
+  layout,
   props: {
     status: Number,
+    error: String,
   },
-  layout,
+  metaInfo () {
+    return {
+      title: this.title,
+      titleTemplate: '%s | ' + this.$title
+    }
+  },
   computed: {
     title() {
       return {
         503: '503: Service Unavailable',
         500: '500: Server Error',
         404: '404: Page Not Found',
-        403: '404: Forbidden',
+        403: '403: Forbidden',
       }[this.status]
     },
     description() {
@@ -31,5 +51,18 @@ export default {
       }[this.status]
     },
   },
+  created () {
+    this.$nextTick(() => {
+      console.error('error', this.error)
+    })
+  }
 }
 </script>
+
+<style scoped>
+  #message {
+    color: red;
+    font-size: 4vw;
+    line-height: 1;
+  }
+</style>
